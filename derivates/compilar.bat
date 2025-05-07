@@ -1,0 +1,1 @@
+g++ main_deriv.cpp derivatives.cpp
