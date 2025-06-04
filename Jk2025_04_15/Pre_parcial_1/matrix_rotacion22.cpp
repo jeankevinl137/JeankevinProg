@@ -35,6 +35,13 @@ int main(int argc, char **argv){
 }
 
 
+std::vector<double>matrix_x(double thetax){
+    std::vector<double> m_x={1.0, 0.0, 0.0, 
+        0.0, std::cos(thetax), -std::sin(thetax), 
+        0.0, std::sin(thetax), std::cos(thetax) };
+        return m_x;
+
+}
 
 
 std::vector<double>matrix_y(double thetay){
@@ -67,4 +74,15 @@ for (int kk = 0; kk < ncols; ++kk) {
 }
 }
 return C;
+}
+
+void print_matrix(const std::vector<double> & data, int m, int n)
+{
+  for (int ii = 0; ii < m; ++ii) {
+    for (int jj = 0; jj < n; ++jj) {
+      std::cout << data[ii*n + jj] << " ";
+    }
+    std::cout << "\n";
+  }
+  std::cout << "\n";
 }
