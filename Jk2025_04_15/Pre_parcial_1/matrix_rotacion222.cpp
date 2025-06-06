@@ -15,12 +15,12 @@ std::vector<double> product_matrix(const std::vector<double> & A,
     const int nrows, const int ncols);
 
 int main(int argc, char **argv){
-    const double vx = std::stoi(argv[1]);
-    const double vy = std::stoi(argv[2]);
-    const double vz = std::stoi(argv[3]);
-    const double thetax = std::stoi(argv[4]);
-    const double thetay = std::stoi(argv[5]);
-    const double thetaz = std::stoi(argv[6]);
+    const double vx = std::stod(argv[1]);
+    const double vy = std::stod(argv[2]);
+    const double vz = std::stod(argv[3]);
+    const double thetax = std::stod(argv[4]);
+    const double thetay = std::stod(argv[5]);
+    const double thetaz = std::stod(argv[6]);
     std::vector<double>V = {vx, vy, vz};
     std::vector<double>m_x = matrix_x(thetax);
     std::vector<double>m_y =matrix_y(thetay);
@@ -28,7 +28,9 @@ int main(int argc, char **argv){
     std::vector<double>m_zy =product_matrix(m_z, m_y, 3, 3);
     std::vector<double>m_zyx =product_matrix(m_zy, m_x, 3,3);
     std::vector<double>m_zyxv =product_matrix(m_zyx, V,3,1);
-
+    print_matrix(m_z, 3, 3);
+    print_matrix(m_zy, 3, 3);
+    print_matrix(m_zyx, 3, 3);
     print_matrix(m_zyxv, 3, 1);
     return 0;
 
@@ -37,7 +39,7 @@ int main(int argc, char **argv){
 
 std::vector<double>matrix_x(double thetax){
     std::vector<double> m_x={1.0, 0.0, 0.0, 
-        0.0, std::cos(thetax), -std::sin(thetax), 
+        0.0, std::cos(thetax), (-1.0)*std::sin(thetax), 
         0.0, std::sin(thetax), std::cos(thetax) };
         return m_x;
 
@@ -47,14 +49,14 @@ std::vector<double>matrix_x(double thetax){
 std::vector<double>matrix_y(double thetay){
     std::vector<double> m_y={std::cos(thetay), 0.0, std::sin(thetay), 
         0.0, 1.0, 0.0, 
-        -std::sin(thetay), 0.0, std::cos(thetay) };
+        (-1.0)*std::sin(thetay), 0.0, std::cos(thetay) };
     return m_y;
 
 }
 
 
 std::vector<double>matrix_z(double thetaz){
-    std::vector<double> m_z={std::cos(thetaz), -std::sin(thetaz), 0.0, 
+    std::vector<double> m_z={std::cos(thetaz), (-1.0)*std::sin(thetaz), 0.0, 
         std::sin(thetaz), std::cos(thetaz), 0.0, 
         0.0, 0.0, 1 };
         return m_z;
